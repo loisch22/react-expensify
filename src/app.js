@@ -11,13 +11,22 @@ const ExpenseDashboardPage = () => (
     This is from my Dashboard Component
   </div>
 );
+const AddExpensePage = () => (
+  <div>
+    This is from my Add Expense Component
+  </div>
+);
 
-//syntax for setting up router
-//route requires props
-//path = url & component
+//BrowserRouter expects one child so put div and place as many routes inside div
+//currently not using client-side server - make change to dev-server - we want index.html to load and react-router to decide what to show in browser
+//made change in webpack
+//exact={true} means path needs to match exactly to render to page
 const routes = (
   <BrowserRouter>
-    <Route path="/" component={ExpenseDashboardPage}/>
+    <div>
+      <Route path="/" component={ExpenseDashboardPage} exact={true}/>
+      <Route path="/create" component={AddExpensePage} />
+    </div>
   </BrowserRouter>
 );
 
