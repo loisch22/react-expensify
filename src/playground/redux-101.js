@@ -23,13 +23,17 @@ const store = createStore((state = { count: 0 }, action) => {
 });
 
 //function gets called every time store changes -- shows each time state changes
-store.subscribe(() => {
+//return value for subscribe is actually unsubscribe
+const unsubscribe = store.subscribe(() => {
   console.log(store.getState());
 });
 
 store.dispatch({
   type: 'INCREMENT'
 });
+
+//subscription stops
+unsubscribe();
 
 store.dispatch({
   type: 'INCREMENT'
