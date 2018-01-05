@@ -3,7 +3,6 @@ console.log('destructuring');
 //Can pull off properties to own variable no need for person.name just name variable
 
 const person = {
-  name: 'Andrew',
   age: 27,
   location: {
     city: 'Seattle',
@@ -12,12 +11,12 @@ const person = {
 };
 
 //es6 Destructuring
-const { name, age } = person;
+//set default value for name if name exists use that, if it doesnt use the default 
+const { name = 'Anonymous', age } = person;
 
 console.log(`${name} is ${age}.`);
 
 //simplify code by Destructuring
-//rename properties
 const { city, temp: temperature } = person.location;
 
 if (city && temperature) {
