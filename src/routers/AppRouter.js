@@ -7,7 +7,11 @@ import HelpPage from '../components/HelpPage';
 import Header from '../components/Header';
 import NotFoundPage from '../components/NotFoundPage';
 
-//Passing in components and props behind scenes
+//dynamic url setup for edit
+// /edit/:valueName - can pass specific ID
+//sets up param to include id: "whateverId"
+//fetch id from db
+//props only passed if component - Header has no props
 const AppRouter = () => (
   <BrowserRouter>
     <div>
@@ -15,7 +19,7 @@ const AppRouter = () => (
       <Switch>
         <Route path="/" component={ExpenseDashboardPage} exact={true}/>
         <Route path="/create" component={AddExpensePage} />
-        <Route path="/edit" component={EditExpensePage} />
+        <Route path="/edit/:id" component={EditExpensePage} />
         <Route path="/help" component={HelpPage} />
         <Route component={NotFoundPage}/>
       </Switch>
