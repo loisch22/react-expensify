@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //import components
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 
@@ -25,10 +25,15 @@ const HelpPage = () => (
     This is from my help page
   </div>
 );
-//add event listener override browser - use JS code to change the page - React router gives us components to use client side routing
-//Behind scenes uses client-side routing
-//JS gives call to ReactDOM.render to re-render the page
-//When linking internally use <Link> vs <a>
+const Header = () => (
+  <header>
+    <h1>Expensify</h1>
+    <NavLink exact={true} to="/" activeClassName="is-active">Home</NavLink>
+    <NavLink to="/create" activeClassName="is-active">Create Expense</NavLink>
+    <NavLink to="/edit" activeClassName="is-active">Edit Expense</NavLink>
+    <NavLink to="/help" activeClassName="is-active">Help</NavLink>
+  </header>
+);
 const NotFoundPage = () => (
   <div>
     404 - <Link to="/">Go Home</Link>
@@ -39,13 +44,16 @@ const NotFoundPage = () => (
 
 const routes = (
   <BrowserRouter>
-    <Switch>
-      <Route path="/" component={ExpenseDashboardPage} exact={true}/>
-      <Route path="/create" component={AddExpensePage} />
-      <Route path="/edit" component={EditExpensePage} />
-      <Route path="/help" component={HelpPage} />
-      <Route component={NotFoundPage}/>
-    </Switch>
+    <div>
+      <Header/>
+      <Switch>
+        <Route path="/" component={ExpenseDashboardPage} exact={true}/>
+        <Route path="/create" component={AddExpensePage} />
+        <Route path="/edit" component={EditExpensePage} />
+        <Route path="/help" component={HelpPage} />
+        <Route component={NotFoundPage}/>
+      </Switch>
+    </div>
   </BrowserRouter>
 );
 
