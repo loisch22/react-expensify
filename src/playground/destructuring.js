@@ -1,24 +1,32 @@
-console.log('destructuring');
-//ES6 Object Destructuring
-//Can pull off properties to own variable no need for person.name just name variable
+// console.log('destructuring');
+//
+// const person = {
+//   name: 'Andrew',
+//   age: 27,
+//   location: {
+//     city: 'Seattle',
+//     temp: 40
+//   }
+// };
+//
+// const { name: firstName = 'Anonymous', age } = person;
+//
+// console.log(`${firstName} is ${age}.`);
+//
+// const { city, temp: temperature } = person.location;
+//
+// if (city && temperature) {
+//   console.log(`It's ${temperature} in ${city}.`);
+// }
 
-const person = {
-  name: 'Andrew',
-  age: 27,
-  location: {
-    city: 'Seattle',
-    temp: 40
+const book = {
+  title: 'Ego is the Enemy',
+  author: 'Ryan Holiday',
+  publisher: {
+    name: 'Penguin'
   }
 };
 
-//es6 Destructuring
-//possible to set default value and change variable name
-const { name: firstName = 'Anonymous', age } = person;
+const {name: publisherName = 'Self-Published'} = book.publisher;
 
-console.log(`${firstName} is ${age}.`);
-
-const { city, temp: temperature } = person.location;
-
-if (city && temperature) {
-  console.log(`It's ${temperature} in ${city}.`);
-}
+console.log(publisherName);
