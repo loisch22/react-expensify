@@ -16,16 +16,24 @@ const AddExpensePage = () => (
     This is from my Add Expense Component
   </div>
 );
+const EditExpensePage = () => (
+  <div>
+    This is from the edit expense page
+  </div>
+);
+const HelpPage = () => (
+  <div>
+    This is from the help page
+  </div>
+);
 
-//BrowserRouter expects one child so put div and place as many routes inside div
-//currently not using client-side server - make change to dev-server - we want index.html to load and react-router to decide what to show in browser
-//made change in webpack
-//exact={true} means path needs to match exactly to render to page
 const routes = (
   <BrowserRouter>
     <div>
       <Route path="/" component={ExpenseDashboardPage} exact={true}/>
       <Route path="/create" component={AddExpensePage} />
+      <Route path="/edit" component={EditExpensePage} />
+      <Route path="/help" component={HelpPage} />
     </div>
   </BrowserRouter>
 );
