@@ -3,6 +3,7 @@
 
 import { createStore } from 'redux';
 
+//calls store when loaded then again when dispatch is called
 const store = createStore((state = { count: 0 }, action) => {
   //more common to use switch
   switch (action.type) {
@@ -24,7 +25,7 @@ const store = createStore((state = { count: 0 }, action) => {
 });
 
 console.log(store.getState());
-//Actions run according to order of dispatch called below 
+//Actions run according to order of dispatch called below
 //increment
 store.dispatch({
   type: 'INCREMENT'
