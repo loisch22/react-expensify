@@ -12,18 +12,14 @@ const person = {
 };
 
 //es6 Destructuring
-const {name, age} = person;
+const { name, age } = person;
 
 console.log(`${name} is ${age}.`);
 
 //simplify code by Destructuring
-const {city, temp} = person.location;
+//rename properties
+const { city, temp: temperature } = person.location;
 
-if (city && temp) {
-  console.log(`It's ${temp} in ${city}.`);
+if (city && temperature) {
+  console.log(`It's ${temperature} in ${city}.`);
 }
-
-
-// if (person.location.city && person.location.temp) {
-//   console.log(`It's ${person.location.temp} in ${person.location.city}.`);
-// }
