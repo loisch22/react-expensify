@@ -1,14 +1,25 @@
-//install Redux $yarn add redux@3.7.2
-//call once to create store - this is from redux library
+//use Actions to change redux store values
+//Actions - object that gets sent to the store - describes type of action we'd like to take
+
 import { createStore } from 'redux';
 
-//create redux store
-//createStore(must pass function)
-//state is current state aka prevState
-//define state within (same syntax as this.state = { })
 const store = createStore((state = { count: 0 }) => {
+  //gets called twice 1. when store initially runs 2. when store.dispatch() is called
+  console.log('running');
   return state;
 });
 
-//returns current state object of object - built in createStore method
+//Actions
+//increment
+//type: ACTION_TYPE_NAME
+//send off action object to store by using dispatch
+store.dispatch({
+  type: 'INCREMENT'
+});
+
+
+//decrement
+
+//reset
+
 console.log(store.getState());
