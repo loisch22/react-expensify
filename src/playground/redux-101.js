@@ -3,31 +3,41 @@
 
 import { createStore } from 'redux';
 
-//action parameter = store.dispatch action being passed
 const store = createStore((state = { count: 0 }, action) => {
-  //check action type
-  //don't change state/action but use value to commute new value
-  if (action.type === 'INCREMENT') {
-    return {
-      count: state.count + 1
-    };
-  } else {
-    return state;
+  //more common to use switch
+  switch (action.type) {
+    case 'INCREMENT':
+      return {
+        count: state.count + 1
+      };
+    case 'DECREMENT':
+      return {
+        count: state.count - 1
+      };
+    case 'RESET':
+      return {
+        count: 0
+      };
+    default:
+      return state;
   }
 });
 
-console.log(store.getState()); 
-//Actions
+console.log(store.getState());
+//Actions run according to order of dispatch called below 
 //increment
-//type: ACTION_TYPE_NAME
-//send off action object to store by using dispatch
 store.dispatch({
   type: 'INCREMENT'
 });
 
-
 //decrement
+store.dispatch({
+  type: 'DECREMENT'
+});
 
 //reset
+store.dispatch({
+  type: 'RESET'
+});
 
 console.log(store.getState());
