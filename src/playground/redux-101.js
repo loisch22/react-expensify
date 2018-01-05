@@ -6,12 +6,15 @@ import { createStore } from 'redux';
 const store = createStore((state = { count: 0 }, action) => {
   switch (action.type) {
     case 'INCREMENT':
+      //if comparison statement is true do x if false y -- x : y
+      const incrementBy = typeof action.incrementBy === 'number' ? action.incrementBy : 1;
       return {
-        count: state.count + 1
+        count: state.count + incrementBy
       };
     case 'DECREMENT':
+      const decrementBy = typeof action.decrementBy === 'number' ? action.decrementBy : 1;
       return {
-        count: state.count - 1
+        count: state.count - decrementBy
       };
     case 'RESET':
       return {
@@ -22,18 +25,17 @@ const store = createStore((state = { count: 0 }, action) => {
   }
 });
 
-//function gets called every time store changes -- shows each time state changes
-//return value for subscribe is actually unsubscribe
 const unsubscribe = store.subscribe(() => {
   console.log(store.getState());
 });
 
+//dispatch dynamic actions
+//type HAS to be provided
+//now action.type and action.incrementBy exists
 store.dispatch({
-  type: 'INCREMENT'
+  type: 'INCREMENT',
+  incrementBy: 5
 });
-
-//subscription stops
-unsubscribe();
 
 store.dispatch({
   type: 'INCREMENT'
@@ -44,5 +46,6 @@ store.dispatch({
 });
 
 store.dispatch({
-  type: 'DECREMENT'
+  type: 'DECREMENT',
+  decrementBy: 10
 });
