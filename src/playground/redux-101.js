@@ -3,12 +3,20 @@
 
 import { createStore } from 'redux';
 
-const store = createStore((state = { count: 0 }) => {
-  //gets called twice 1. when store initially runs 2. when store.dispatch() is called
-  console.log('running');
-  return state;
+//action parameter = store.dispatch action being passed
+const store = createStore((state = { count: 0 }, action) => {
+  //check action type
+  //don't change state/action but use value to commute new value
+  if (action.type === 'INCREMENT') {
+    return {
+      count: state.count + 1
+    };
+  } else {
+    return state;
+  }
 });
 
+console.log(store.getState()); 
 //Actions
 //increment
 //type: ACTION_TYPE_NAME
