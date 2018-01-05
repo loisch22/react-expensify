@@ -7,11 +7,6 @@ import HelpPage from '../components/HelpPage';
 import Header from '../components/Header';
 import NotFoundPage from '../components/NotFoundPage';
 
-//dynamic url setup for edit
-// /edit/:valueName - can pass specific ID
-//sets up param to include id: "whateverId"
-//fetch id from db
-//props only passed if component - Header has no props
 const AppRouter = () => (
   <BrowserRouter>
     <div>
