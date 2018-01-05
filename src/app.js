@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//browserrouter once to create the router - route for every single page
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+//import components
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 
-//example component
 const ExpenseDashboardPage = () => (
   <div>
     This is from my Dashboard Component
@@ -26,15 +25,18 @@ const HelpPage = () => (
     This is from my help page
   </div>
 );
+//add event listener override browser - use JS code to change the page - React router gives us components to use client side routing
+//Behind scenes uses client-side routing
+//JS gives call to ReactDOM.render to re-render the page
+//When linking internally use <Link> vs <a>
 const NotFoundPage = () => (
   <div>
-    404!
+    404 - <Link to="/">Go Home</Link>
   </div>
 );
 
-//path is optional - no path matches with all other paths
-//use another component react router gives aka <Switch>
-//Switch looks for match then stops when match is found - doesn't look at down below - notfound will only show when no matches are found
+//Goal: client-side routing - not full page refresh - doesn't need to rely on server
+
 const routes = (
   <BrowserRouter>
     <Switch>
