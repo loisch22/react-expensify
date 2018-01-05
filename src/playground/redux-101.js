@@ -1,11 +1,9 @@
-//use Actions to change redux store values
-//Actions - object that gets sent to the store - describes type of action we'd like to take
+//Watch for changes in store
+//Dispatch an action and pass some data
 
 import { createStore } from 'redux';
 
-//calls store when loaded then again when dispatch is called
 const store = createStore((state = { count: 0 }, action) => {
-  //more common to use switch
   switch (action.type) {
     case 'INCREMENT':
       return {
@@ -24,21 +22,23 @@ const store = createStore((state = { count: 0 }, action) => {
   }
 });
 
-console.log(store.getState());
-//Actions run according to order of dispatch called below
-//increment
+//function gets called every time store changes -- shows each time state changes
+store.subscribe(() => {
+  console.log(store.getState());
+});
+
 store.dispatch({
   type: 'INCREMENT'
 });
 
-//decrement
 store.dispatch({
-  type: 'DECREMENT'
+  type: 'INCREMENT'
 });
 
-//reset
 store.dispatch({
   type: 'RESET'
 });
 
-console.log(store.getState());
+store.dispatch({
+  type: 'DECREMENT'
+});
