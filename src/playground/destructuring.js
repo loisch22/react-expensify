@@ -36,14 +36,12 @@
 
 //Array destructuring
 
-const address = [];
-
-//destructure array - ordered list of variable names - matches name by position
-//don't need to use all items from array - leave spaces for positions you don't want, then stop where you don't want the rest
-//set defaults
+const address = ['1299 S James Street', 'Seattle', 'Washington', '19192'];
 const [, , state = 'Oregon'] = address;
-
 console.log(`You are in ${state}`);
 
-//problem: not clear what address[1]/[2] is
-// console.log(`You are in ${address[1]} ${address[2]}`)
+const item = ['Coffee (hot)', '$2.00', '$2.50', '$2.75'];
+
+const [name, , mediumPrice] = item;
+
+console.log(`A medium ${name} costs ${mediumPrice}`);
