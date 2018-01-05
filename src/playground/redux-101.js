@@ -6,7 +6,7 @@ import { createStore } from 'redux';
 const store = createStore((state = { count: 0 }, action) => {
   switch (action.type) {
     case 'INCREMENT':
-      //if comparison statement is true do x if false y -- x : y
+      //ternary operator - if comparison statement is true do x if false y -- x : y
       const incrementBy = typeof action.incrementBy === 'number' ? action.incrementBy : 1;
       return {
         count: state.count + incrementBy
@@ -29,9 +29,6 @@ const unsubscribe = store.subscribe(() => {
   console.log(store.getState());
 });
 
-//dispatch dynamic actions
-//type HAS to be provided
-//now action.type and action.incrementBy exists
 store.dispatch({
   type: 'INCREMENT',
   incrementBy: 5
