@@ -31,10 +31,16 @@ const addExpense = (
 // Expenses Reducers
 const expensesReducerDefaultState = [];
 
+// ES6 Spread Operator
+// [...names] - add name [...names, 'Sam'] - name value doesn't change
+//return action.expense to return entire array object
 const expensesReducer = (state = expensesReducerDefaultState, action) => {
   switch (action.type) {
     case 'ADD_EXPENSE':
-      return state.concat(action.expense);
+      return [
+        ...state,
+        action.expense
+      ];
     default:
       return state;
   }
@@ -62,12 +68,10 @@ const store = createStore(
   })
 );
 
-//keeps track of changes
 store.subscribe(() => {
   console.log(store.getState());
 });
 
-//current state being passed above to addExpense() - changes made - then expensesReducer passes current state data 
 store.dispatch(addExpense({ description: 'Rent', amount: 100 }));
 
 const demoState = {
