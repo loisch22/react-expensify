@@ -21,6 +21,10 @@ const addExpense = (
 });
 
 // REMOVE_EXPENSE
+const removeExpense = ({ id } = {}) => ({
+  type: 'REMOVE_EXPENSE',
+  id
+});
 // EDIT_EXPENSE
 // SET_TEXT_FILTER
 // SORT_BY_DATE
@@ -33,7 +37,8 @@ const expensesReducerDefaultState = [];
 
 // ES6 Spread Operator
 // [...names] - add name [...names, 'Sam'] - name value doesn't change
-//return action.expense to return entire array object
+//return action.expense to return entire array object from addExpense()
+//filter creates new array with all elements that pass the test
 const expensesReducer = (state = expensesReducerDefaultState, action) => {
   switch (action.type) {
     case 'ADD_EXPENSE':
@@ -41,6 +46,11 @@ const expensesReducer = (state = expensesReducerDefaultState, action) => {
         ...state,
         action.expense
       ];
+    case 'REMOVE_EXPENSE':
+    //not destructured way
+      return state.filter((expense) => {
+          return expense.id !== action.id;
+      });
     default:
       return state;
   }
@@ -72,7 +82,10 @@ store.subscribe(() => {
   console.log(store.getState());
 });
 
-store.dispatch(addExpense({ description: 'Rent', amount: 100 }));
+const expenseOne = store.dispatch(addExpense({ description: 'Rent', amount: 100 }));
+const expenseTwo = store.dispatch(addExpense({ description: 'Coffee', amount: 600 }));
+
+store.dispatch(removeExpense({ id: expenseOne.expense.id }))
 
 const demoState = {
   expenses: [{
