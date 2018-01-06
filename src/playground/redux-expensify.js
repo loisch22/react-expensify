@@ -102,6 +102,7 @@ const user = {
   age: 24
 };
 
+//order matters, overrides each other
 console.log({
   ...user,
   location: 'Seattle',
