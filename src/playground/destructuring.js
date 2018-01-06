@@ -1,4 +1,4 @@
-//Object Destructuring
+//ES6 Object Destructuring
 
 // console.log('destructuring');
 //
@@ -34,11 +34,11 @@
 // console.log(publisherName);
 
 
-//Array destructuring
+//ES6 Array destructuring
 
-const address = ['1299 S James Street', 'Seattle', 'Washington', '19192'];
-const [, , state = 'Oregon'] = address;
-console.log(`You are in ${state}`);
+// const address = ['1299 S James Street', 'Seattle', 'Washington', '19192'];
+// const [, , state = 'Oregon'] = address;
+// console.log(`You are in ${state}`);
 
 const item = ['Coffee (hot)', '$2.00', '$2.50', '$2.75'];
 
