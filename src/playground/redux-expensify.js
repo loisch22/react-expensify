@@ -47,9 +47,9 @@ const expensesReducer = (state = expensesReducerDefaultState, action) => {
         action.expense
       ];
     case 'REMOVE_EXPENSE':
-    //not destructured way
-      return state.filter((expense) => {
-          return expense.id !== action.id;
+    //destructured way
+      return state.filter(({ id }) => {
+          return id !== action.id;
       });
     default:
       return state;
