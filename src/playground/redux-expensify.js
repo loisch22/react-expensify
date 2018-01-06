@@ -43,7 +43,6 @@ const expensesReducer = (state = expensesReducerDefaultState, action) => {
         action.expense
       ];
     case 'REMOVE_EXPENSE':
-    //destructured way
       return state.filter(({ id }) => id !== action.id);
     default:
       return state;
@@ -96,3 +95,14 @@ const demoState = {
     endDate: undefined
   }
 };
+
+//need babel object spread operator
+const user = {
+  name: 'Jen',
+  age: 24
+};
+
+console.log({
+  ...user,
+  location: 'Seattle'
+});
