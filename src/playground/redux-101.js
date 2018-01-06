@@ -22,7 +22,19 @@ const resetCount = () => ({
   type: 'RESET'
 });
 
-const store = createStore((state = { count: 0 }, action) => {
+//createStore function is called a Reducer -  Actions describe the fact that soemthing happened, Reducers specify how the applications state changes in response
+
+//Reducers
+//Key attribute - 1. Pure functions - output is only determined by the input i.e. state/function
+
+//not pure function example - relies on global variable a
+// let a = 10;
+// const add = (b) => {
+//   return a + b;
+// };
+
+//seperate reducer - typically have multiple reducers
+const countReducer = createStore((state = { count: 0 }, action) => {
   switch (action.type) {
     case 'INCREMENT':
       return {
@@ -43,7 +55,10 @@ const store = createStore((state = { count: 0 }, action) => {
     default:
       return state;
   }
-});
+})
+
+
+const store = createStore(countReducer);
 
 const unsubscribe = store.subscribe(() => {
   console.log(store.getState());
