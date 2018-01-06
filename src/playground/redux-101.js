@@ -25,13 +25,7 @@ const resetCount = () => ({
 //createStore function is called a Reducer -  Actions describe the fact that soemthing happened, Reducers specify how the applications state changes in response
 
 //Reducers
-//Key attribute - 1. Pure functions - output is only determined by the input i.e. state/function
-
-//not pure function example - relies on global variable a
-// let a = 10;
-// const add = (b) => {
-//   return a + b;
-// };
+//Key attribute - 1. Pure functions - output is only determined by the input i.e. state/function; doesn't interact with variables outside its scope i.e. global variables, manipulating global variables 2. Never change state or action  - don't directly change their value
 
 //seperate reducer - typically have multiple reducers
 const countReducer = createStore((state = { count: 0 }, action) => {
