@@ -1,18 +1,6 @@
 import { createStore, combineReducers } from 'redux';
 
-//ADD_EXPENSE
-//REMOVE_EXPENSE
-//EDIT_EXPENSE
-//SET_TEXT_FILTER
-//SORT_BY_DATE
-//SORT_BY_AMOUNT
-//SET_START_DATE
-//SET_END_DATE
-
-//Create two reducers: expense and filters - combine reducers as one reducer with two reducers associated with it
-
-//Expenses Reducers
-//better esp when needing to pass in multiple properties like filters
+// Expenses Reducers
 const expensesReducerDefaultState = [];
 
 const expensesReducer = (state = expensesReducerDefaultState, action) => {
@@ -22,7 +10,6 @@ const expensesReducer = (state = expensesReducerDefaultState, action) => {
   }
 };
 
-//set default state object - if no value is passed, use these defaults
 const filtersDefaultState = {
   text: '',
   sortBy: 'date',
@@ -37,8 +24,7 @@ const filtersReducer = (state = filtersDefaultState, action) => {
   }
 };
 
-//Store Creation
-//root object name: reducerName
+// Store Creation
 const store = createStore(
   combineReducers({
     expenses: expensesReducer,
