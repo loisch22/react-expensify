@@ -13,6 +13,15 @@ const decrementCount = ({ decrementBy = 1 } = {}) => ({
     decrementBy
 });
 
+const setCount = ({ count } = {}) => ({
+  type: 'SET',
+  count
+});
+
+const resetCount = () => ({
+  type: 'RESET'
+});
+
 const store = createStore((state = { count: 0 }, action) => {
   switch (action.type) {
     case 'INCREMENT':
@@ -40,34 +49,14 @@ const unsubscribe = store.subscribe(() => {
   console.log(store.getState());
 });
 
-//dynamic action
-// store.dispatch({
-//   type: 'INCREMENT',
-//   incrementBy: 5
-// });
 store.dispatch(incrementCount({ incrementBy: 5 }))
 
-//better to use function name to avoid typos, clearer error msg
 store.dispatch(incrementCount());
 
-//generic action
-store.dispatch({
-  type: 'RESET'
-});
+store.dispatch(resetCount());
 
-// store.dispatch({
-//   type: 'DECREMENT',
-//   decrementBy: 10
-// });
 store.dispatch(decrementCount({ decrementBy: 10 }));
 
-// store.dispatch({
-//   type: 'DECREMENT',
-// });
 store.dispatch(decrementCount());
 
-//force if you use set to set value to 101
-store.dispatch({
-  type: 'SET',
-  count: 101
-});
+store.dispatch(setCount({ count: 101 }))
