@@ -104,5 +104,6 @@ const user = {
 
 console.log({
   ...user,
-  location: 'Seattle'
+  location: 'Seattle',
+  age: 27
 });
