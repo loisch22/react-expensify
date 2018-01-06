@@ -35,10 +35,6 @@ const removeExpense = ({ id } = {}) => ({
 // Expenses Reducers
 const expensesReducerDefaultState = [];
 
-// ES6 Spread Operator
-// [...names] - add name [...names, 'Sam'] - name value doesn't change
-//return action.expense to return entire array object from addExpense()
-//filter creates new array with all elements that pass the test
 const expensesReducer = (state = expensesReducerDefaultState, action) => {
   switch (action.type) {
     case 'ADD_EXPENSE':
@@ -48,9 +44,7 @@ const expensesReducer = (state = expensesReducerDefaultState, action) => {
       ];
     case 'REMOVE_EXPENSE':
     //destructured way
-      return state.filter(({ id }) => {
-          return id !== action.id;
-      });
+      return state.filter(({ id }) => id !== action.id);
     default:
       return state;
   }
