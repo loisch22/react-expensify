@@ -2,13 +2,15 @@ import { createStore } from 'redux';
 
 //Action generators - functions that return action objects
 
-//destructure arguments that get passed i.e. payload
-
 const incrementCount = ({ incrementBy = 1 } = {}) => ({
-  //implicitly returns new action object
     type: 'INCREMENT',
-    //same name incrementBy: incrementBy
     incrementBy
+});
+
+//implicitly return an object
+const decrementCount = ({ decrementBy = 1 } = {}) => ({
+    type: 'DECREMENT',
+    decrementBy
 });
 
 const store = createStore((state = { count: 0 }, action) => {
@@ -18,9 +20,8 @@ const store = createStore((state = { count: 0 }, action) => {
         count: state.count + action.incrementBy
       };
     case 'DECREMENT':
-      const decrementBy = typeof action.decrementBy === 'number' ? action.decrementBy : 1;
       return {
-        count: state.count - decrementBy
+        count: state.count - action.decrementBy
       };
     case 'SET':
       return {
@@ -54,10 +55,16 @@ store.dispatch({
   type: 'RESET'
 });
 
-store.dispatch({
-  type: 'DECREMENT',
-  decrementBy: 10
-});
+// store.dispatch({
+//   type: 'DECREMENT',
+//   decrementBy: 10
+// });
+store.dispatch(decrementCount({ decrementBy: 10 }));
+
+// store.dispatch({
+//   type: 'DECREMENT',
+// });
+store.dispatch(decrementCount());
 
 //force if you use set to set value to 101
 store.dispatch({
