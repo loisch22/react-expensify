@@ -137,7 +137,6 @@ const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
     const endDateMatch = typeof endDate !== 'number' || expense.createdAt <= endDate;
     const textMatch = true;
 
-    //
     return startDateMatch && endDateMatch && textMatch;
   });
 };
@@ -169,7 +168,7 @@ const expenseTwo = store.dispatch(addExpense({ description: 'Coffee', amount: 40
 // store.dispatch(sortByAmount()); // string 'amount'
 // store.dispatch(sortByDate()); // string 'date'
 
-store.dispatch(setStartDate(-2000));
+store.dispatch(setStartDate(125));
 // store.dispatch(setStartDate());
 // store.dispatch(setEndDate(1250));
 
