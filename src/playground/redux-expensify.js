@@ -128,20 +128,16 @@ const filtersReducer = (state = filtersDefaultState, action) => {
   }
 };
 
-//timestamps (milliseconds)
-//timestamp 0 = jan 1 1970 (unix epoch)
-//any positive or neg integar value ie. 33400 = 33.4ms after jan 1 1970, 10, -203
-
-
 // Get visible expenses
 const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
   return expenses.filter((expense) => {
-    //access to individual expense
-    //if all are true
-    const startDateMatch;
-    const endDateMatch;
-    const textMatch;
+    //filter creates new arr with elements that are true - if createdAt is 1 and startDate is 2 then won't be included - it was created before the desired startDate
+    //if not a number its okay, won't affect whether expense is visible or not based on this
+    const startDateMatch = typeof startDate !== 'number' || expense.createdAt >= startDate;
+    const endDateMatch = typeof endDate !== 'number' || expense.createdAt <= endDate;
+    const textMatch = true;
 
+    //
     return startDateMatch && endDateMatch && textMatch;
   });
 };
@@ -160,20 +156,20 @@ store.subscribe(() => {
   console.log(visibleExpenses);
 });
 
-const expenseOne = store.dispatch(addExpense({ description: 'Rent', amount: 100 }));
-const expenseTwo = store.dispatch(addExpense({ description: 'Coffee', amount: 400 }));
+const expenseOne = store.dispatch(addExpense({ description: 'Rent', amount: 100, createdAt: 1000 }));
+const expenseTwo = store.dispatch(addExpense({ description: 'Coffee', amount: 400, createdAt: -1000 }));
 
 // store.dispatch(removeExpense({ id: expenseOne.expense.id }));
 //
 // store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500, description: 'Starbucks' }));
 //
-store.dispatch(setTextFilter('rent'));
+// store.dispatch(setTextFilter('rent'));
 // store.dispatch(setTextFilter());
 //
 // store.dispatch(sortByAmount()); // string 'amount'
 // store.dispatch(sortByDate()); // string 'date'
 
-// store.dispatch(setStartDate(125));
+store.dispatch(setStartDate(-2000));
 // store.dispatch(setStartDate());
 // store.dispatch(setEndDate(1250));
 
