@@ -135,7 +135,7 @@ const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
     //if not a number its okay, won't affect whether expense is visible or not based on this
     const startDateMatch = typeof startDate !== 'number' || expense.createdAt >= startDate;
     const endDateMatch = typeof endDate !== 'number' || expense.createdAt <= endDate;
-    const textMatch = true;
+    const textMatch = expense.description.toLowerCase().includes(text.toLowerCase());
 
     return startDateMatch && endDateMatch && textMatch;
   });
@@ -162,15 +162,15 @@ const expenseTwo = store.dispatch(addExpense({ description: 'Coffee', amount: 40
 //
 // store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500, description: 'Starbucks' }));
 //
-// store.dispatch(setTextFilter('rent'));
+store.dispatch(setTextFilter('co'));
 // store.dispatch(setTextFilter());
 //
 // store.dispatch(sortByAmount()); // string 'amount'
 // store.dispatch(sortByDate()); // string 'date'
 
-// store.dispatch(setStartDate(125));
+// store.dispatch(setStartDate(0));
 // store.dispatch(setStartDate());
-store.dispatch(setEndDate(999));
+// store.dispatch(setEndDate(999));
 
 
 
