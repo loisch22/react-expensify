@@ -168,9 +168,9 @@ const expenseTwo = store.dispatch(addExpense({ description: 'Coffee', amount: 40
 // store.dispatch(sortByAmount()); // string 'amount'
 // store.dispatch(sortByDate()); // string 'date'
 
-store.dispatch(setStartDate(125));
+// store.dispatch(setStartDate(125));
 // store.dispatch(setStartDate());
-// store.dispatch(setEndDate(1250));
+store.dispatch(setEndDate(999));
 
 
 
