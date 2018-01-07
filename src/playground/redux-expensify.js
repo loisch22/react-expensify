@@ -128,6 +128,24 @@ const filtersReducer = (state = filtersDefaultState, action) => {
   }
 };
 
+//timestamps (milliseconds)
+//timestamp 0 = jan 1 1970 (unix epoch)
+//any positive or neg integar value ie. 33400 = 33.4ms after jan 1 1970, 10, -203
+
+
+// Get visible expenses
+const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
+  return expenses.filter((expense) => {
+    //access to individual expense
+    //if all are true
+    const startDateMatch;
+    const endDateMatch;
+    const textMatch;
+
+    return startDateMatch && endDateMatch && textMatch;
+  });
+};
+
 // Store Creation
 const store = createStore(
   combineReducers({
@@ -137,25 +155,27 @@ const store = createStore(
 );
 
 store.subscribe(() => {
-  console.log(store.getState());
+  const state = store.getState();
+  const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
+  console.log(visibleExpenses);
 });
 
-// const expenseOne = store.dispatch(addExpense({ description: 'Rent', amount: 100 }));
-// const expenseTwo = store.dispatch(addExpense({ description: 'Coffee', amount: 400 }));
-//
+const expenseOne = store.dispatch(addExpense({ description: 'Rent', amount: 100 }));
+const expenseTwo = store.dispatch(addExpense({ description: 'Coffee', amount: 400 }));
+
 // store.dispatch(removeExpense({ id: expenseOne.expense.id }));
 //
 // store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500, description: 'Starbucks' }));
 //
-// store.dispatch(setTextFilter('rent'));
+store.dispatch(setTextFilter('rent'));
 // store.dispatch(setTextFilter());
 //
 // store.dispatch(sortByAmount()); // string 'amount'
 // store.dispatch(sortByDate()); // string 'date'
 
-store.dispatch(setStartDate(125));
-store.dispatch(setStartDate());
-store.dispatch(setEndDate(1250));
+// store.dispatch(setStartDate(125));
+// store.dispatch(setStartDate());
+// store.dispatch(setEndDate(1250));
 
 
 
