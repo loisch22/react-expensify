@@ -2,7 +2,7 @@ import React from 'react';
 //connect function connects component to redux store
 import { connect } from 'react-redux';
 import ExpenseListItem from './ExpenseListItem';
-
+import selectExpenses from '../selectors/expenses';
 
 const ExpenseList = (props) => (
   <div>
@@ -16,8 +16,7 @@ const ExpenseList = (props) => (
 //automatically reruns - gets current values
 const mapStateToProps = (state) => {
   return {
-    expenses: state.expenses,
-    filters: state.filters
+    expenses: selectExpenses(state.expenses, state.filters)
   };
 };
 
