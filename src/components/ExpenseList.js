@@ -9,11 +9,12 @@ const ExpenseList = (props) => (
   </div>
 );
 
-//hoc - connect(whatInfoFromStoreYouWantComponentToAccess)ComponentYouWantToConnect
-const ConnectedExpenseList = connect((state) => {
+const mapStateToProps = (state) => {
   return {
     expenses: state.expenses
   };
-})(ExpenseList);
-
-export default ConnectedExpenseList;
+};
+//hoc - connect(whatInfoFromStoreYouWantComponentToAccess)ComponentYouWantToConnect
+export default connect(mapStateToProps)(ExpenseList);
+//more common syntax for exporting default
+// export default ConnectedExpenseList;
