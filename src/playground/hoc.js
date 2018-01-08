@@ -10,6 +10,7 @@ const Info = (props) => (
   <div>
     <h1>Info</h1>
     <p>This info is: {props.info}</p>
+    {props.isAdmin && <p>This is from admin</p>}
   </div>
 );
 
