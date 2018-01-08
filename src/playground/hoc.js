@@ -14,9 +14,6 @@ const Info = (props) => (
   </div>
 );
 
-//create regular function - pass component as parameter
-//common naming for those components = WrappedComponent - capital cuz component name
-//pass props = spread operator -> grabs all the props
 const withAdminWarning = (WrappedComponent) => {
   return (props) => (
     <div>
@@ -26,8 +23,18 @@ const withAdminWarning = (WrappedComponent) => {
   );
 };
 
+const requireAuthentication = (WrappedComponent) => {
+  return (props) => (
+    <div>
+      { props.isAuth ? <WrappedComponent {...props}/> : <p>Please log in</p> }
+    </div>
+  );
+};
+
 //with component you want to add
 const AdminInfo = withAdminWarning(Info);
+const AuthInfo = requireAuthentication(Info);
 
 
-ReactDOM.render(<AdminInfo isAdmin={true} info="These are the details." />, document.getElementById('app'));
+// ReactDOM.render(<AdminInfo isAdmin={true} info="These are the details." />, document.getElementById('app'));
+ReactDOM.render(<AuthInfo isAuth={false} info="These are the details." />, document.getElementById('app'));
