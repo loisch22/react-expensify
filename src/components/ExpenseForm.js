@@ -1,4 +1,13 @@
 import React from 'react';
+import moment from 'moment';
+import { SingleDatePicker } from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
+
+// const date = new Date(); -- too complicated! use moment instead
+//represents current date
+//format prints formated version of now variable
+const now = moment();
+console.log(now.format('MMM Do, YYYY'));
 
 // logic for add/edit expense
 
