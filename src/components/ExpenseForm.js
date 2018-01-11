@@ -35,7 +35,7 @@ export default class ExpenseForm extends React.Component {
     this.setState(() => ({ createdAt }));
   };
   onFocusChange = ({ focused }) => {
-    this.setState({ calendarFocused: focused })
+    this.setState(() => ({ calendarFocused: focused }))
   };
 
   render() {
@@ -60,6 +60,8 @@ export default class ExpenseForm extends React.Component {
             onDateChange={this.onDateChange}
             focused={this.state.calendarFocused}
             onFocusChange={this.onFocusChange}
+            numberOfMonths={1}
+            isOutsideRange={() => false}
           />
           <textarea
             placeholder="Add a note for your expense (optional)"
