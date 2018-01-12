@@ -13,7 +13,8 @@ export default class ExpenseForm extends React.Component {
     amount: '',
     note: '',
     createdAt: moment(),
-    calendarFocused: false
+    calendarFocused: false,
+    errorState: ''
   };
   onDescriptionChange = (e) => {
     const description = e.target.value;
@@ -21,9 +22,8 @@ export default class ExpenseForm extends React.Component {
   };
   onAmountChange = (e) => {
     const amount = e.target.value;
-    //set conditional logic so only 2 decimal places
-    // regular expression regex
-    if (amount.match(/^\d*(\.\d{0,2})?$/)) {
+    // regular expression regex - change to require one digit before . - and clear empty amount aka !amount
+    if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
       this.setState(() => ({ amount }));
     }
   };
@@ -31,17 +31,37 @@ export default class ExpenseForm extends React.Component {
     const note = e.target.value;
     this.setState(() => ({ note }));
   };
+  //prevent user from clearing calendar, only if value is passed can it be changed, else it does nothing stays on default current date
   onDateChange = (createdAt) => {
-    this.setState(() => ({ createdAt }));
+    if (createdAt) {
+      this.setState(() => ({ createdAt }));
+    }
   };
   onFocusChange = ({ focused }) => {
     this.setState(() => ({ calendarFocused: focused }))
+  };
+  onSubmit = (e) => {
+    //prevents full page refresh, js takes over render
+    e.preventDefault();
+     if (!this.state.description || !this.state.amount) {
+       this.setState(() => ({ errorState: 'Please provide a description and amount.' }));
+     } else {
+       this.setState(() => ({ errorState: '' }));
+       this.props.onSubmit({
+         description: this.state.description,
+         amount: parseFloat(this.state.amount, 10) * 100,
+         //js display time in ms
+         createdAt: this.state.createdAt.valueOf(),
+         note: this.state.note
+       });
+     }
   };
 
   render() {
     return (
       <div>
-        <form>
+      {this.state.errorState && <p>{this.state.errorState}</p>}
+        <form onSubmit={this.onSubmit}>
           <input
             type="text"
             placeholder="Description"
