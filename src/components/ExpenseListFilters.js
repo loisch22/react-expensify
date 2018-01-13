@@ -1,26 +1,51 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setTextFilter, sortByDate, sortByAmount } from '../actions/filters';
+import { DateRangePicker } from 'react-dates';
+import { setTextFilter, sortByDate, sortByAmount, setStartDate, setEndDate } from '../actions/filters';
 
-//component has access to data below, only want filters.text for now
-//need onChange - takes function, when onChange runs, value changes
-const ExpenseListFilters = (props) => (
-  <div>
-    <input
-      type="text" value={props.filters.text} onChange={(e) => { props.dispatch(setTextFilter(e.target.value));
-    }}/>
-    <select
-      value={props.filters.sortBy}
-      onChange={(e) => {
-      e.target.value === 'date' ? props.dispatch(sortByDate()) : props.dispatch(sortByAmount())
-    }}>
-      <option value="date">Date</option>
-      <option value="amount">Amount</option>
-    </select>
-  </div>
-);
+//change to class based component to track focusedInput/onFocusChange value
 
-//what data we want from the store - also gives access to dispatch
+class ExpenseListFilters extends React.Component {
+  state = {
+    //either null or string
+    calendarFocused: null
+  };
+  onDatesChange = ({ startDate, endDate }) => {
+    this.props.dispatch(setStartDate(startDate));
+    this.props.dispatch(setEndDate(endDate));
+  };
+  onFocusChange = (calendarFocused) => {
+    this.setState(() => ({ calendarFocused }))
+  };
+  render() {
+    return (
+      <div>
+        <input
+          type="text" value={this.props.filters.text} onChange={(e) => { this.props.dispatch(setTextFilter(e.target.value));
+        }}/>
+        <select
+          value={this.props.filters.sortBy}
+          onChange={(e) => {
+          e.target.value === 'date' ? this.props.dispatch(sortByDate()) : this.props.dispatch(sortByAmount())
+        }}>
+          <option value="date">Date</option>
+          <option value="amount">Amount</option>
+        </select>
+        <DateRangePicker
+          startDate={this.props.filters.startDate}
+          endDate={this.props.filters.endDate}
+          onDatesChange={this.onDatesChange}
+          focusedInput={this.state.calendarFocused}
+          onFocusChange={this.onFocusChange}
+          showClearDates={true}
+          numberOfMonths={1}
+          isOutsideRange={() => false}
+        />
+      </div>
+    );
+  }
+};
+
 const mapStateToProps = (state) => {
   return {
     filters: state.filters
