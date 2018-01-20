@@ -17,3 +17,36 @@ test('should setup edit expense action object', () => {
     updates: { description: 'Dog Food'}
   });
 });
+
+test('should setup add expense action object', () => {
+  const expenseData = {
+    description: 'Rent',
+    note: 'This was last months rent',
+    amount: 109500,
+    createdAt: 1000
+  };
+
+  const action = addExpense(expenseData);
+
+  expect(action).toEqual({
+    type: 'ADD_EXPENSE',
+    expense: {
+      ...expenseData,
+      id: expect.any(String)
+    }
+  });
+});
+
+test('should setup default return for add expense action object', () => {
+  const action = addExpense();
+  expect(action).toEqual({
+    type: 'ADD_EXPENSE',
+    expense: {
+      id: expect.any(String),
+      description: '',
+      note: '',
+      amount: 0,
+      createdAt: 0
+    }
+  });
+});
