@@ -1,31 +1,6 @@
 import selectExpenses from '../../selectors/expenses';
 import moment from 'moment';
-// default 0 = January 1 @ midnight
-
-// mock data
-const expenses = [{
-  id: '1',
-  description: 'Gum',
-  note: '',
-  amount: 195,
-  createdAt: 0
-},
-{
-  id: '2',
-  description: 'Rent',
-  note: '',
-  amount: 109500,
-  // 4 days before
-  createdAt: moment(0).subtract(4, 'days').valueOf()
-},
-{
-  id: '3',
-  description: 'Credit Card',
-  note: '',
-  amount: 4500,
-  // 4 days after
-  createdAt: moment(0).add(4, 'days').valueOf()
-}]
+import expenses from '../fixtures/expenses';
 
 test('should filter by text value', () => {
   const filters = {
