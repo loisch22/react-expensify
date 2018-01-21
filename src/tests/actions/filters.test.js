@@ -19,24 +19,23 @@ test('should generate set end date action object', () => {
 });
 
 test('should generate sort by date action object', () => {
-  const action = sortByDate();
-  expect(action).toEqual({
+  expect(sortByDate()).toEqual({
     type: 'SORT_BY_DATE'
   });
 });
 
 test('should generate sort by amount action object', () => {
-  const action = sortByAmount();
-  expect(action).toEqual({
+  expect(sortByAmount()).toEqual({
     type: 'SORT_BY_AMOUNT'
   });
 });
 
 test('should set text filter by given text', () => {
-  const action = setTextFilter('date');
+  const text = 'date';
+  const action = setTextFilter(text);
   expect(action).toEqual({
     type: 'SET_TEXT_FILTER',
-    text: 'date'
+    text
   });
 });
 
