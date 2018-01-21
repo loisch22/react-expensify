@@ -5,5 +5,5 @@ import Adapter from 'enzyme-adapter-react-16';
 
 // single method to configure everything
 Enzyme.configure({
-  adaptor: new Adapter()
+  adapter: new Adapter()
 });
