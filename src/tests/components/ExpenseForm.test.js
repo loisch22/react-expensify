@@ -14,3 +14,16 @@ test('should render ExpenseForm with expense data', () => {
   const wrapper = shallow(<ExpenseForm expense={expenses[0]} />);
   expect(wrapper).toMatchSnapshot();
 });
+
+test('should render error for invalid form submission', () => {
+  const wrapper = shallow(<ExpenseForm />);
+  expect(wrapper).toMatchSnapshot();
+  // need to fake preventDefault
+  // simulate event for submiting form - find form by element name
+  wrapper.find('form').simulate('submit', {
+    preventDefault: () => { }
+  });
+  // get length of error state, length should be > 0
+  expect(wrapper.state('errorState').length).toBeGreaterThan(0);
+  expect(wrapper).toMatchSnapshot();
+});
