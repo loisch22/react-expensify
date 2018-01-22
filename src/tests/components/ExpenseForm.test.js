@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import ExpenseForm from '../../components/ExpenseForm';
 import expenses from '../fixtures/expenses';
+import moment from 'moment';
 
 // test fails due to moment() returning diff time each test
 // manual mock moment data - jest docs
@@ -69,10 +70,25 @@ test('should call onSubmit prop for valid form submission', () => {
     preventDefault: () => { }
   });
   expect(wrapper.state('errorState')).toBe('');
-  expect(onSubmitSpy).toHaveBeenCalledWith({
+  expect(onSubmitSpy).toHaveBeenLastCalledWith({
     description: expenses[0].description,
     amount: expenses[0].amount,
     note: expenses[0].note,
     createdAt: expenses[0].createdAt
   });
+});
+
+test('should set new date on date change', () => {
+  const now = moment();
+  const wrapper = shallow(<ExpenseForm />);
+  // find by component, need onDateChange prop by using enzyme method
+  wrapper.find('SingleDatePicker').prop('onDateChange')(now); // == onDateChange(now)
+  expect(wrapper.state('createdAt')).toEqual(now);
+});
+
+test('should set calendar focus on change', () => {
+  const focused = true; // same name as variable passed since object
+  const wrapper = shallow(<ExpenseForm />);
+  wrapper.find('SingleDatePicker').prop('onFocusChange')({ focused });
+  expect(wrapper.state('calendarFocused')).toEqual(true);
 });
