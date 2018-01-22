@@ -5,7 +5,7 @@ import { addExpense } from '../actions/expenses';
 
 export class AddExpensePage extends React.Component {
   onSubmit = (expense) => {
-    this.props.onSubmit(expense);
+    this.props.addExpense(expense);
     this.props.history.push('/');
   };
   render() {
@@ -22,7 +22,8 @@ export class AddExpensePage extends React.Component {
 
 // works with dispatch not state
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (expense) => dispatch(addExpense(expense))
+  // same name as action generator
+  addExpense: (expense) => dispatch(addExpense(expense))
 });
 
 // undefined refers to mapStateToProps which is undefined
