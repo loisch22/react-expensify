@@ -35,7 +35,7 @@ test('should set description on input change', () => {
   expect(wrapper.state('description')).toBe(value);
 });
 
-test('set set note on textarea change', () => {
+test('should set note on textarea change', () => {
   const wrapper = shallow(<ExpenseForm />);
   const value = 'New note';
   wrapper.find('textarea').simulate('change', {
@@ -60,4 +60,11 @@ test('should not set amount if invalid input', () => {
     target: { value }
   });
   expect(wrapper.state('amount')).toBe('');
+});
+
+test('should call onSubmit prop for valid form submission', () => {
+  // test spies == mocked functions - created by jest, check how many times function was called, what arguments it took
+  const onSubmitSpy = jest.fn(); // spy
+  onSubmitSpy(); // call function
+  expect(onSubmitSpy).toHaveBeenCalled(); //test to see if its been called
 });
