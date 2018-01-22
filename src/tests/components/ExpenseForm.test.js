@@ -65,6 +65,6 @@ test('should not set amount if invalid input', () => {
 test('should call onSubmit prop for valid form submission', () => {
   // test spies == mocked functions - created by jest, check how many times function was called, what arguments it took
   const onSubmitSpy = jest.fn(); // spy
-  onSubmitSpy(); // call function
-  expect(onSubmitSpy).toHaveBeenCalled(); //test to see if its been called
+  onSubmitSpy('Andrew', 'Philadelphia'); // call function
+  expect(onSubmitSpy).toHaveBeenCalledWith('Andrew', 'Philadelphia'); //test to see if its been called
 });
