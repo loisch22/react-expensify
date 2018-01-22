@@ -63,8 +63,16 @@ test('should not set amount if invalid input', () => {
 });
 
 test('should call onSubmit prop for valid form submission', () => {
-  // test spies == mocked functions - created by jest, check how many times function was called, what arguments it took
-  const onSubmitSpy = jest.fn(); // spy
-  onSubmitSpy('Andrew', 'Philadelphia'); // call function
-  expect(onSubmitSpy).toHaveBeenCalledWith('Andrew', 'Philadelphia'); //test to see if its been called
+  const onSubmitSpy = jest.fn();
+  const wrapper = shallow(<ExpenseForm expense={expenses[0]} onSubmit={onSubmitSpy}/>);
+  wrapper.find('form').simulate('submit', {
+    preventDefault: () => { }
+  });
+  expect(wrapper.state('errorState')).toBe('');
+  expect(onSubmitSpy).toHaveBeenCalledWith({
+    description: expenses[0].description,
+    amount: expenses[0].amount,
+    note: expenses[0].note,
+    createdAt: expenses[0].createdAt
+  });
 });
