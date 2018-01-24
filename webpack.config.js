@@ -1,6 +1,3 @@
-// webpack plugin for styles - extract-text-webpack-plugin
-// checks bundle.js for files that match test
-// node uses require not import
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -26,17 +23,27 @@ module.exports = (env) => {
         // told webpack to extract stuff
         use: CSSExtract.extract({
           use: [
-            'css-loader',
-            'sass-loader'
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true
+              }
+            }
           ]
         })
       }]
     },
-    // successfully extract styles into own files 
+    // successfully extract styles into own files
     plugins: [
       CSSExtract
     ],
-    devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
+    devtool: isProduction ? 'source-map' : 'inline-source-map',
     devServer: {
       contentBase: path.join(__dirname, 'public'),
       //tells dev-server we will handle routing via client-side code
