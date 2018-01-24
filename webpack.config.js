@@ -30,9 +30,10 @@ module.exports = (env) => {
         ]
       }]
     },
-    // takes about 5mb - opt for slower version - build will be slower for production - only need it to be fast for dev since making changes frequently
-    // new prod source map = external huge file but only loads when devtools are open
-    devtool: 'cheap-module-eval-source-map',
+    // source-map takes more time to build, is external file
+    // webpack devtools documentation for more info on source-map - decreases file size
+    // bundle.js size is size for most users - if user opens devtools bundle.js.map size is loaded 
+    devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
     devServer: {
       contentBase: path.join(__dirname, 'public'),
       //tells dev-server we will handle routing via client-side code
