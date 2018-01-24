@@ -12,8 +12,6 @@ import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
 
 const store = configureStore();
-// test if source map is working - shows up in devtools
-console.log('test');
 // Provider will pass the store - pass prop aka store
 const jsx = (
   <Provider store={store}>
