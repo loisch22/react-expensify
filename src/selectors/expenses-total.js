@@ -1,7 +1,5 @@
 export const getExpensesTotal = (expenses) => {
-  const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
   return expenses
     .map((expense) => expense.amount)
-    .reduce(reducer, 0);
+    .reduce((sum,value) => sum + value, 0);
 };
