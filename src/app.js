@@ -6,6 +6,7 @@ import configureStore from './store/configureStore';
 import { addExpense } from './actions/expenses';
 import { setTextFilter } from './actions/filters';
 import getVisibleExpenses from './selectors/expenses';
+import getExpensesTotal from './selectors/expenses-total';
 // create sep file for style - rn its in bundle.js = bundle is bigger, styles don't get added to browser until after js runs
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
