@@ -1,4 +1,3 @@
-// make connection to firebase
 import * as firebase from 'firebase';
 
 const config = {
@@ -12,7 +11,21 @@ const config = {
 
 firebase.initializeApp(config);
 
-// database is tool provided by fb - gets ref to root of db - set lets you provide the data key value pairs - check firebase database to see this updated data
-firebase.database().ref().set({
-  name: 'Lois C'
+const database = firebase.database();
+
+database.ref().set({
+  name: 'Lois C',
+  age: 27,
+  isSingle: true,
+  location: {
+    city: 'Seattle',
+    country: 'United States'
+  }
+});
+
+database.ref('age').set(28);
+database.ref('location/city').set('New York');
+database.ref('attributes').set({
+  height: 164,
+  weight: 104
 });
