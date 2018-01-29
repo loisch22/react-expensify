@@ -21,11 +21,17 @@ database.ref().set({
     city: 'Seattle',
     country: 'United States'
   }
+}).then(() => {
+  console.log('Data is saved!');
+}).catch((e) => {
+  console.log('This failed.', e);
 });
 
-database.ref('age').set(28);
-database.ref('location/city').set('New York');
 database.ref('attributes').set({
   height: 164,
   weight: 104
+}).then(() => {
+  console.log('Second set call worked.');
+}).catch((e) => {
+  console.log('Second set failed.', e);
 });
