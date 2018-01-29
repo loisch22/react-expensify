@@ -27,11 +27,12 @@ database.ref().set({
   console.log('This failed.', e);
 });
 
-database.ref('attributes').set({
-  height: 164,
-  weight: 104
-}).then(() => {
-  console.log('Second set call worked.');
+// database.ref('isSingle').set(null); // another way to remove
+
+const databaseRef = database.ref();
+
+databaseRef.remove().then(() => {
+  console.log('Relationship status has been deleted');
 }).catch((e) => {
-  console.log('Second set failed.', e);
+  console.log('Sorry, deletion failed.', e);
 });
