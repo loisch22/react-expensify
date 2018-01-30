@@ -13,25 +13,60 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
-database.ref().set({
-  name: 'Lois C',
-  age: 27,
-  job: 'Software Developer',
-  location: {
-    city: 'Seattle',
-    country: 'United States'
-  }
-}).then(() => {
-  console.log('Data is saved!');
-}).catch((e) => {
-  console.log('This failed.', e);
+// i.e. sets subscriptions to fetch data that reruns on changes, on - take callback function
+database.ref().on('value', (snapshot) => {
+  console.log(snapshot.val());
 });
 
-const updateRef = database.ref();
-updateRef.update({
-  job: 'Sr Software Developer',
-  'location/city': 'Boston' // syntax for nested
-});
+setTimeout(() => {
+  database.ref('age').set(28);
+}, 3500);
+
+// unsubscribe to changes aka no more console log
+setTimeout(() => {
+  database.ref().off();
+}, 7000);
+
+setTimeout(() => {
+  database.ref('age').set(30);
+}, 10500);
+
+
+
+// fetch data once never re-runs
+// database.ref('location/cit')
+//   .once('value')
+//   .then((snapshot) => {
+//     const val = snapshot.val();
+//     console.log(val);
+//   })
+//   .catch((e) => {
+//     console.log('Error fetching data', e);
+//   });
+
+// database.ref().set({
+//   name: 'Lois C',
+//   age: 27,
+//   stressLevel: 6,
+//   job: {
+//     title: 'Software Developer',
+//     company: 'Google'
+//   },
+//   location: {
+//     city: 'Seattle',
+//     country: 'United States'
+//   }
+// }).then(() => {
+//   console.log('Data is saved!');
+// }).catch((e) => {
+//   console.log('This failed.', e);
+// });
+//
+// database.ref().update({
+//   stressLevel: 9,
+//   'location/city': 'Seattle',
+//   'job/company': 'Amazon'
+// });
 
 
 // const databaseRef = database.ref('isSingle');
