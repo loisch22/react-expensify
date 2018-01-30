@@ -13,9 +13,11 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
-// i.e. sets subscriptions to fetch data that reruns on changes, on - take callback function
-database.ref().on('value', (snapshot) => {
+// remove single subscription
+const onValueChange = database.ref().on('value', (snapshot) => {
   console.log(snapshot.val());
+}, (e) => {
+  console.log('Error with data fetching', e); 
 });
 
 setTimeout(() => {
@@ -24,7 +26,7 @@ setTimeout(() => {
 
 // unsubscribe to changes aka no more console log
 setTimeout(() => {
-  database.ref().off();
+  database.ref().off(onValueChange);
 }, 7000);
 
 setTimeout(() => {
