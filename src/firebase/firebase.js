@@ -14,7 +14,8 @@ firebase.initializeApp(config);
 const database = firebase.database();
 
 database.ref().on('value', (snapshot) => {
-  console.log(snapshot.val().name, "is a", snapshot.val().job.title, "at", snapshot.val().job.company);
+  const val = snapshot.val();
+  console.log(`${val.name} is a ${val.job.title} at ${val.job.company}`);
 });
 
 setTimeout(() => {
