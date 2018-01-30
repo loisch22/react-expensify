@@ -13,26 +13,16 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
-// remove single subscription
-const onValueChange = database.ref().on('value', (snapshot) => {
-  console.log(snapshot.val());
-}, (e) => {
-  console.log('Error with data fetching', e); 
+database.ref().on('value', (snapshot) => {
+  console.log(snapshot.val().name, "is a", snapshot.val().job.title, "at", snapshot.val().job.company);
 });
 
 setTimeout(() => {
-  database.ref('age').set(28);
-}, 3500);
-
-// unsubscribe to changes aka no more console log
-setTimeout(() => {
-  database.ref().off(onValueChange);
-}, 7000);
-
-setTimeout(() => {
-  database.ref('age').set(30);
-}, 10500);
-
+  database.ref().update({
+    name: 'Lindy Choi',
+    'job/company': 'Facebook'
+  });
+}, 3000);
 
 
 // fetch data once never re-runs
