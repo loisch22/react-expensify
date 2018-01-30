@@ -27,12 +27,19 @@ database.ref().set({
   console.log('This failed.', e);
 });
 
-// database.ref('isSingle').set(null); // another way to remove
-
-const databaseRef = database.ref();
-
-databaseRef.remove().then(() => {
-  console.log('Relationship status has been deleted');
-}).catch((e) => {
-  console.log('Sorry, deletion failed.', e);
+const updateRef = database.ref();
+updateRef.update({
+  name: 'LoLo',
+  age: 32,
+  job: 'Software Developer',
+  isSingle: null
 });
+// updates, creates new child 'job', delete isSingle using null
+
+// const databaseRef = database.ref('isSingle');
+//
+// databaseRef.remove().then(() => {
+//   console.log('Relationship status has been deleted');
+// }).catch((e) => {
+//   console.log('Sorry, deletion failed.', e);
+// });
