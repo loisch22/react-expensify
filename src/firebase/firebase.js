@@ -16,7 +16,7 @@ const database = firebase.database();
 database.ref().set({
   name: 'Lois C',
   age: 27,
-  isSingle: true,
+  job: 'Software Developer',
   location: {
     city: 'Seattle',
     country: 'United States'
@@ -29,12 +29,10 @@ database.ref().set({
 
 const updateRef = database.ref();
 updateRef.update({
-  name: 'LoLo',
-  age: 32,
-  job: 'Software Developer',
-  isSingle: null
+  job: 'Sr Software Developer',
+  'location/city': 'Boston' // syntax for nested
 });
-// updates, creates new child 'job', delete isSingle using null
+
 
 // const databaseRef = database.ref('isSingle');
 //
