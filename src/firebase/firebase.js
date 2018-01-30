@@ -13,24 +13,47 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
-database.ref('expenses').push({
-  description: 'Dog food',
-  note: 'Chicken',
-  amount: 20,
-  createdAt: 1000
-});
-database.ref('expenses').push({
-  description: 'My food',
-  note: 'Smoothie ingredients',
-  amount: 15,
-  createdAt: 3000
-});
-database.ref('expenses').push({
-  description: 'Dog food',
-  note: 'Chicken',
-  amount: 20,
-  createdAt: 1000
-});
+// child_removed event triggered when child is removed
+// gives more info on what exactly was changed
+database.ref('expenses').on('child_removed', (snapshot) => {
+  console.log(snapshot.key, snapshot.val());
+})
+
+// creates new array with list objects from firebase
+// database.ref('expenses')
+//   .once('value')
+//   .then((snapshot) => {
+//     const expenses = [];
+//
+//     snapshot.forEach((childSnapshot) => {
+//       expenses.push({
+//         id: childSnapshot.key,
+//         ...childSnapshot.val()
+//       });
+//     });
+//     console.log(expenses);
+//   });
+
+// database.ref('expenses')
+//   .on('value', (snapshot) => {
+//     const expenses = [];
+//
+//     snapshot.forEach((childSnapshot) => {
+//       expenses.push({
+//         id: childSnapshot.key,
+//         ...childSnapshot.val()
+//       });
+//     });
+//     console.log(expenses);
+//   });
+
+// database.ref('expenses').push({
+//   description: 'Dog food',
+//   note: 'Chicken',
+//   amount: 20,
+//   createdAt: 1000
+// });
+
 // push creates new property on our ref aka notes,
 // database.ref('notes').push({
 //   title: 'Course Topics',
