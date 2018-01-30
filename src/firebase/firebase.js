@@ -13,18 +13,68 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
-database.ref().on('value', (snapshot) => {
-  const val = snapshot.val();
-  console.log(`${val.name} is a ${val.job.title} at ${val.job.company}`);
+database.ref('expenses').push({
+  description: 'Dog food',
+  note: 'Chicken',
+  amount: 20,
+  createdAt: 1000
 });
+database.ref('expenses').push({
+  description: 'My food',
+  note: 'Smoothie ingredients',
+  amount: 15,
+  createdAt: 3000
+});
+database.ref('expenses').push({
+  description: 'Dog food',
+  note: 'Chicken',
+  amount: 20,
+  createdAt: 1000
+});
+// push creates new property on our ref aka notes,
+// database.ref('notes').push({
+//   title: 'Course Topics',
+//   body: 'React Native, Angular'
+// });
 
-setTimeout(() => {
-  database.ref().update({
-    name: 'Lindy Choi',
-    'job/company': 'Facebook'
-  });
-}, 3000);
+// create list of objects instead of array of objects
+// const firebaseNotes = {
+//   notes: {
+//     asdklf: {
+//       title: 'First Note',
+//       body: 'Note one'
+//     },
+//     asdfjj: {
+//       title: 'Second Note',
+//       body: 'Note two'
+//     }
+//   }
+// };
+//
+// const notes = [{
+//   id: '12',
+//   title: 'First Note',
+//   body: 'Note one'
+// },
+// {
+//   id: '123',
+//   title: 'Second Note',
+//   body: 'Note two'
+// }];
+//
+// database.ref('notes').set(notes);
 
+// database.ref().on('value', (snapshot) => {
+//   const val = snapshot.val();
+//   console.log(`${val.name} is a ${val.job.title} at ${val.job.company}`);
+// });
+//
+// setTimeout(() => {
+//   database.ref().update({
+//     name: 'Lindy Choi',
+//     'job/company': 'Facebook'
+//   });
+// }, 3000);
 
 // fetch data once never re-runs
 // database.ref('location/cit')
