@@ -13,21 +13,23 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
+export { firebase, database as default };
+
 // child_removed event triggered when child is removed
 // gives more info on what exactly was changed
-database.ref('expenses').on('child_removed', (snapshot) => {
-  console.log(snapshot.key, snapshot.val());
-});
+// database.ref('expenses').on('child_removed', (snapshot) => {
+//   console.log(snapshot.key, snapshot.val());
+// });
 
 // child_changed
-database.ref('expenses').on('child_changed', (snapshot) => {
-  console.log('Child changed', snapshot.key, snapshot.val());
-});
+// database.ref('expenses').on('child_changed', (snapshot) => {
+//   console.log('Child changed', snapshot.key, snapshot.val());
+// });
 
 // child_added
-database.ref('expenses').on('child_added', (snapshot) => {
-  console.log('Child added:', snapshot.key, snapshot.val());
-});
+// database.ref('expenses').on('child_added', (snapshot) => {
+//   console.log('Child added:', snapshot.key, snapshot.val());
+// });
 
 // creates new array with list objects from firebase
 // database.ref('expenses')
@@ -57,12 +59,12 @@ database.ref('expenses').on('child_added', (snapshot) => {
 //     console.log(expenses);
 //   });
 
-database.ref('expenses').push({
-  description: 'Dog food',
-  note: 'Chicken',
-  amount: 20,
-  createdAt: 1000
-});
+// database.ref('expenses').push({
+//   description: 'Dog food',
+//   note: 'Chicken',
+//   amount: 20,
+//   createdAt: 1000
+// });
 
 // push creates new property on our ref aka notes,
 // database.ref('notes').push({

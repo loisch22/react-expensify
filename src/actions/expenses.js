@@ -1,35 +1,31 @@
 import uuid from 'uuid';
-
-// current code does:
-// component calls action generator
-// action generator returns object
-// component dispatches object
-// redux store changes
-
-// asynchronous:
-// component calls action generator
-// action generator returns function
-// component dispatches function - redux does not support functions so need a module
-// function runs (has the ability to dispatch other actions/do whatever)
+import database from '../firebase/firebase';
 
 // ADD_EXPENSE
-export const addExpense = (
-    {
+export const addExpense = (expense) => ({
+  type: 'ADD_EXPENSE',
+  expense
+});
+
+// gets called internally via redux, returning function works due to thunk
+export const startAddExpense = (expenseData = {}) => {
+  return (dispatch) => {
+    const {
       description = '',
       note = '',
       amount = 0,
       createdAt = 0
-    } = {}
-  ) => ({
-  type: 'ADD_EXPENSE',
-  expense: {
-    id: uuid(),//npm library uuid
-    description,
-    note,
-    amount,
-    createdAt
-  }
-});
+    } = expenseData;
+    const expense = { description, note, amount, createdAt };
+    // asyncrhonous - goes through firebase then redux
+    database.ref('expenses').push(expense).then((ref) => {
+      dispatch(addExpense({
+        id: ref.key,
+        ...expense
+      }));
+    });
+  };
+};
 
 // REMOVE_EXPENSE
 export const removeExpense = ({ id } = {}) => ({
