@@ -1,5 +1,17 @@
 import uuid from 'uuid';
 
+// current code does:
+// component calls action generator
+// action generator returns object
+// component dispatches object
+// redux store changes
+
+// asynchronous:
+// component calls action generator
+// action generator returns function
+// component dispatches function - redux does not support functions so need a module
+// function runs (has the ability to dispatch other actions/do whatever)
+
 // ADD_EXPENSE
 export const addExpense = (
     {
