@@ -1,2 +1,5 @@
 .idea/workspace.xml
 public/dist
+.env.test
+.env.development
+node_modules/
