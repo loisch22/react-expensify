@@ -3,14 +3,7 @@
 exports[`should render Header correctly 1`] = `
 <header>
   <h1>
-    <NavLink
-      activeClassName="active"
-      ariaCurrent="true"
-      exact={true}
-      to="/"
-    >
-      Expensify
-    </NavLink>
+    Expensify
   </h1>
   <NavLink
     activeClassName="is-active"

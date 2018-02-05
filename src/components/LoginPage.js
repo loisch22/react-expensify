@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { startLogin } from '../actions/auth';
+import PublicRoute from '../routers/PublicRoute';
 
 export const LoginPage = ({ startLogin }) => (
   <div>

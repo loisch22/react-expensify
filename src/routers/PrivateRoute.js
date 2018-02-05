@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'; // use redux store to check authentication
 import { Route, Redirect } from 'react-router-dom';
+import Header from '../components/Header';
+
 
 export const PrivateRoute = ({
   isAuthenticated,
@@ -9,7 +11,10 @@ export const PrivateRoute = ({
 }) => (
   <Route {...rest} component={(props) => (
     isAuthenticated ? (
-      <Component {...props} /> // renders component
+      <div>
+        <Header />
+        <Component {...props} />
+      </div>
     ) : (
       <Redirect to="/" />
     )
