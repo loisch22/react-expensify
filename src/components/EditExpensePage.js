@@ -1,11 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Modal from 'react-modal';
 import ExpenseForm from './ExpenseForm';
 import { startEditExpense, startRemoveExpense } from '../actions/expenses';
 
-//get props route based on console - like go into match-params-id value
-// needs THIS when using class based components not just PROPS
 export class EditExpensePage extends React.Component {
+  constructor()  {
+    super();
+
+    this.state = {
+        modalIsOpen: false
+    };
+
+    this.openModal = this.openModal.bind(this);
+    this.onCancel = this.onCancel.bind(this);
+  }
+
+  openModal = () => {
+    this.setState({ modalIsOpen: true });
+  };
   onSubmit = (expense) => {
     this.props.startEditExpense(this.props.expense.id, expense);
     this.props.history.push('/');
@@ -14,6 +27,10 @@ export class EditExpensePage extends React.Component {
     this.props.startRemoveExpense({ id: this.props.expense.id });
     this.props.history.push('/');
   };
+  onCancel = () => {
+    this.setState({ modalIsOpen: false });
+  };
+
   render() {
     return (
       <div>
@@ -29,7 +46,22 @@ export class EditExpensePage extends React.Component {
           />
           <button
            className="button -secondary"
-           onClick={this.onClick}>Remove Expense</button>
+           onClick={this.openModal}>Remove Expense</button>
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            contentLabel="Remove Modal"
+            className="modal"
+            overlayClassName="overlay"
+            onRequestClose={this.onCancel}
+          >
+            <h1>Modal Content</h1>
+            <button
+             className="button -secondary"
+             onClick={this.onClick}>Delete Expense</button>
+           <button
+            className="button -secondary"
+            onClick={this.onCancel}>Cancel</button>
+          </Modal>
         </div>
       </div>
     );
